@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NJ Closing Cost Calculator | Kingsbridge Title Agency</title>
+<meta name="description" content="Estimate New Jersey title insurance, closing fees, realty transfer tax and your mortgage payment, based on the NJ title rate manual.">
+<meta property="og:title" content="NJ Closing Cost Calculator | Kingsbridge Title Agency">
+<meta property="og:description" content="Estimate New Jersey title insurance, closing fees, realty transfer tax and your mortgage payment, based on the NJ title rate manual.">
+<meta property="og:image" content="og.png">
+<meta name="theme-color" content="#0f2f2b">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script src="calc.js" defer></script>
+<script src="script.js" defer></script>
+<script src="nav.js" defer></script>
+<script src="order.js" defer></script>
+</head>
+<body class="pg-calculator">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="Kingsbridge Title Agency, home">
+      <img src="img/logo.png" alt="Kingsbridge Title Agency" width="112" height="64">
+    </a>
+    <nav class="nav" id="siteNav" aria-label="Main">
+      <a href="index.html" class="nav-home">Home</a>
+      <a href="calculator.html" aria-current="page">Calculator</a>
+      <a href="services.html">Services</a>
+      <a href="documents.html">Documents</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="about.html">Our Story</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html">Contact</a>
+      <a class="nav-order" href="order.html">Order Title</a>
+    </nav>
+    <div class="bar-actions">
+      <a class="bar-call" href="tel:+12013830660" aria-label="Call (201) 383-0660"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span>(201) 383-0660</span></a>
+      <a class="btn btn-order btn-sm bar-order" href="order.html">Order Title</a>
+      <button class="menu-btn" type="button" aria-controls="siteNav" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section id="calculator" class="calc-section calc-page" aria-labelledby="calc-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker"><span class="tiles" aria-hidden="true"><i></i><i></i><i></i></span>Closing cost calculator</p>
+      <h1 id="calc-title">What will your closing cost?</h1>
+      <p>Title insurance in New Jersey is priced from the state rate manual, so these numbers follow the official schedule. Pick a calculator below.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Calculators">
+      <button class="tab" role="tab" id="tab-title" aria-controls="panel-title" aria-selected="true">Title fees</button>
+      <button class="tab" role="tab" id="tab-transfer" aria-controls="panel-transfer" aria-selected="false" tabindex="-1">Transfer tax</button>
+      <button class="tab" role="tab" id="tab-mortgage" aria-controls="panel-mortgage" aria-selected="false" tabindex="-1">Mortgage</button>
+    </div>
+
+    <!-- Title fee calculator -->
+    <div class="panel" role="tabpanel" id="panel-title" aria-labelledby="tab-title">
+      <div class="calc-grid">
+        <form class="card form" id="titleForm" novalidate>
+          <div class="field">
+            <label for="tcState">State</label>
+            <select id="tcState" disabled><option>New Jersey</option></select>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="tcProperty">Property type</label>
+              <select id="tcProperty">
+                <option value="residential">Residential</option>
+                <option value="commercial">Commercial / other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="tcType">Transaction type</label>
+              <select id="tcType">
+                <option value="purchase">Purchase</option>
+                <option value="refinance">Refinance</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" id="wrapPrice">
+            <label for="tcPrice">Purchase amount</label>
+            <input id="tcPrice" class="money" type="text" inputmode="numeric" autocomplete="off" placeholder="$0" value="$500,000">
+          </div>
+          <div class="field">
+            <label for="tcLoan" id="lblLoan">Mortgage amount</label>
+            <input id="tcLoan" class="money" type="text" inputmode="numeric" autocomplete="off" placeholder="$0 for a cash purchase" value="$400,000">
+          </div>
+          <div class="field" id="wrapExisting" hidden>
+            <label for="tcExisting">Existing mortgage being refinanced</label>
+            <input id="tcExisting" class="money" type="text" inputmode="numeric" autocomplete="off" placeholder="$0">
+            <small>The original amount of the mortgage you are paying off. That part gets the lower refinance rate.</small>
+          </div>
+          <div class="field" id="wrapExempt">
+            <label for="tcExempt">Seller's transfer fee exemption</label>
+            <select id="tcExempt">
+              <option value="none">No exemption</option>
+              <option value="partial">Senior citizen, blind or disabled</option>
+              <option value="partial">Low and moderate income housing</option>
+            </select>
+          </div>
+          <label class="check"><input type="checkbox" id="tcAgent" checked> <span>Kingsbridge as closing agent</span></label>
+          <button class="btn btn-dark btn-block" type="submit">Calculate</button>
+        </form>
+
+        <div class="card results" id="titleResults" aria-live="polite">
+          <div class="res-head">
+            <p class="res-label">Estimated buyer's fees</p>
+            <p class="res-total" id="buyerTotal">$0</p>
+            <p class="res-sub" id="resSummary"></p>
+          </div>
+          <table class="fees">
+            <caption class="vh">Buyer's fees</caption>
+            <tbody id="buyerTable"></tbody>
+            <tfoot><tr><th scope="row">Total buyer's fees</th><td id="buyerTotal2">$0</td></tr></tfoot>
+          </table>
+          <div id="sellerWrap" hidden>
+            <h3 class="fees-h">Seller's fees</h3>
+            <table class="fees">
+              <caption class="vh">Seller's fees</caption>
+              <tbody id="sellerTable"></tbody>
+              <tfoot><tr><th scope="row">Total seller's fees</th><td id="sellerTotal">$0</td></tr></tfoot>
+            </table>
+          </div>
+          <ul class="notes" id="notes"></ul>
+          <p class="legend legend-est"><strong>Estimate only.</strong> Your exact figures come with your title commitment.</p>
+          <div class="res-cta">
+            <a class="btn btn-order btn-block" href="order.html" id="orderFromCalc">Order title for this property</a>
+            <a class="textlink" href="mailto:Leah@Kbridgetitle.com?subject=Title%20quote%20request">Or email us for an exact quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transfer tax -->
+    <div class="panel" role="tabpanel" id="panel-transfer" aria-labelledby="tab-transfer" hidden>
+      <div class="calc-grid">
+        <form class="card form" id="ttForm" novalidate>
+          <div class="field">
+            <label for="ttAmount">Sale amount</label>
+            <input id="ttAmount" class="money" type="text" inputmode="numeric" autocomplete="off" value="$500,000">
+          </div>
+          <div class="field">
+            <label for="ttExempt">Exemption</label>
+            <select id="ttExempt">
+              <option value="none">No exemption</option>
+              <option value="partial">Senior citizen, blind or disabled</option>
+              <option value="partial">Low and moderate income housing</option>
+            </select>
+          </div>
+          <label class="check"><input type="checkbox" id="ttGpf" checked> <span>Graduated percent fee applies (sales over $1,000,000)</span></label>
+          <p class="help">In New Jersey the seller pays the realty transfer fee and the graduated percent fee. Ask your attorney whether an exemption applies.</p>
+          <button class="btn btn-dark btn-block" type="submit">Calculate</button>
+        </form>
+        <div class="card results" aria-live="polite">
+          <div class="res-head">
+            <p class="res-label">Estimated seller's transfer tax</p>
+            <p class="res-total" id="ttTotal">$0</p>
+          </div>
+          <table class="fees"><tbody>
+            <tr><th scope="row">Realty transfer fee</th><td id="ttRtf">$0</td></tr>
+            <tr><th scope="row">Graduated percent fee</th><td id="ttGp">$0</td></tr>
+          </tbody><tfoot><tr><th scope="row">Total</th><td id="ttTotal2">$0</td></tr></tfoot></table>
+          <p class="fine">Rates from the NJ Division of Taxation realty transfer fee schedule. The graduated percent fee is 1% to 3.5% of the full price on Class 2 residential, Class 4A commercial and certain other transfers over $1 million.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mortgage -->
+    <div class="panel" role="tabpanel" id="panel-mortgage" aria-labelledby="tab-mortgage" hidden>
+      <div class="calc-grid">
+        <form class="card form" id="mgForm" novalidate>
+          <div class="field">
+            <label for="mgAmount">Mortgage amount</label>
+            <input id="mgAmount" class="money" type="text" inputmode="numeric" autocomplete="off" value="$400,000">
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="mgRate">Interest rate %</label>
+              <input id="mgRate" type="text" inputmode="decimal" autocomplete="off" value="6.5">
+            </div>
+            <div class="field">
+              <label for="mgYears">Length</label>
+              <select id="mgYears">
+                <option value="40">40 years</option><option value="30" selected>30 years</option><option value="25">25 years</option>
+                <option value="20">20 years</option><option value="15">15 years</option><option value="10">10 years</option><option value="5">5 years</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="mgYear">First payment year</label>
+            <input id="mgYear" type="text" inputmode="numeric" autocomplete="off" value="2026">
+          </div>
+          <button class="btn btn-dark btn-block" type="submit">Calculate</button>
+        </form>
+        <div class="card results" aria-live="polite">
+          <div class="res-head">
+            <p class="res-label">Monthly payment (principal and interest)</p>
+            <p class="res-total" id="mgPay">$0</p>
+            <p class="res-sub">Total interest paid: <strong id="mgInt">$0</strong></p>
+          </div>
+          <details class="amort">
+            <summary>Yearly amortization table</summary>
+            <div class="table-scroll">
+              <table class="amort-t"><thead><tr><th scope="col">Year</th><th scope="col">Interest</th><th scope="col">Principal</th><th scope="col">Balance</th></tr></thead><tbody id="mgTable"></tbody></table>
+            </div>
+          </details>
+          <p class="fine">Does not include taxes, insurance or mortgage insurance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer sources" id="rateSource">
+      <p><strong>Estimate only. Your exact figures come with your title commitment.</strong> Contact us for an exact quote.</p>
+      <p>Where the numbers come from:</p>
+      <ul>
+        <li>Title premiums (owner's, loan, simultaneous issue, refinance rate), endorsements, examination, settlement and closing service letter charges: New Jersey Land Title Insurance Rating Bureau, <a href="https://www.virtualunderwriter.com/-/media/files/virtualunderwriter/imported/pdfs/new-jersey-rate-manual-eff-11-01-2023.pdf" rel="noopener">Manual of Rates and Charges, effective November 1, 2023</a> (sections 3.4, 4.1, 4.2, 4.6.1, 5.1, 6.1, 6.6, 7.1, 7.2.2, 10.5, 10.6, 10.10, 10.98).</li>
+        <li>Realty transfer fee and graduated percent fee (sales over $1,000,000, paid by the seller): NJ Division of Taxation, <a href="https://www.nj.gov/treasury/taxation/realty.shtml" rel="noopener">Realty Transfer Fee</a> and its fee schedules (<a href="https://www.nj.gov/treasury/taxation/pdf/lpt/feeschedunder350.pdf" rel="noopener">up to $350,000</a>, <a href="https://www.nj.gov/treasury/taxation/pdf/lpt/feeschedover350.pdf" rel="noopener">over $350,000</a>).</li>
+        <li>Not included: searches, county recording fees, notice of settlement, wires and delivery. These pass-through costs are not set by either source.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<section class="cta-band" aria-labelledby="cta-title">
+  <div class="wrap cta-grid">
+    <div>
+      <p class="label light"><span class="tiles" aria-hidden="true"><i></i><i></i><i></i></span>Ready when you are</p>
+      <h2 id="cta-title">Order title in one short form.</h2>
+      <p>Fill in what you know and it goes straight to our orders inbox. Prefer to talk? Call (201) 383-0660.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-order btn-lg" href="order.html">Order Title</a>
+      <a class="btn btn-line-light btn-lg" href="contact.html">Contact us</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <img src="img/logo.png" alt="Kingsbridge Title Agency" width="140" height="80">
+      <p>Title insurance, searches, escrow and closings since 2003.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="order.html">Order Title</a><a href="calculator.html">Closing Cost Calculator</a><a href="services.html">Services</a><a href="documents.html">NJ Documents</a><a href="transactions.html">Notable Transactions</a><a href="about.html">Our Story</a><a href="team.html">Team</a><a href="contact.html">Contact</a>
+    </nav>
+    <address class="foot-contact">
+      <a href="https://maps.apple.com/?q=1700+Avenue+of+the+States+Suite+404+Lakewood+NJ+08701">1700 Avenue of the States, Suite 404, Lakewood, NJ 08701</a>
+      <a href="tel:+12013830660">(201) 383-0660</a>
+      <a href="mailto:Leah@Kbridgetitle.com">Leah@Kbridgetitle.com</a>
+    </address>
+  </div>
+  <div class="wrap">
+    <form class="news" id="newsForm" action="mailto:orders@kbridgetitle.com?subject=Newsletter%20signup" method="post" enctype="text/plain" novalidate>
+      <div class="news-text">
+        <p class="news-h"><label for="newsEmail">The Kingsbridge weekly</label></p>
+        <p>News from Kingsbridge in your inbox, once a week.</p>
+      </div>
+      <div class="news-row">
+        <input id="newsEmail" name="EMAIL" type="email" autocomplete="email" inputmode="email" placeholder="Your email" required>
+        <button class="btn btn-order" type="submit">Get the Kingsbridge weekly</button>
+      </div>
+      <p class="news-msg" id="newsMsg" role="status" hidden></p>
+    </form>
+  </div>
+  <div class="wrap"><p class="copy">© Kingsbridge Title Agency</p></div>
+</footer>
+
+<div class="dock" aria-label="Quick actions">
+  <a class="btn btn-order" href="order.html">Order Title</a>
+  <a class="btn btn-line-light" href="tel:+12013830660">Call</a>
+</div>
+</body>
+</html>
